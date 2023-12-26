@@ -1,0 +1,33 @@
+<%- include('./partials/head.ejs') %>
+
+    <body>
+
+        <%- include('./partials/header.ejs') %>
+
+        <form class="form-creacion" action="/crear-plato" method="POST" enctype="multipart/form-data">
+
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre del plato">
+                
+                <label for="descripcionCorta">Descripcion corta</label>
+                <input type="text" name="descripcionCorta" id="descripcionCorta" placeholder="Ingresa tu descripcion corta">
+
+                <label for="descripcionDetallada">Descripcion detallada</label>
+                <textarea name="descripcionDetallada" id="descripcionDetallada" cols="30" rows="10"></textarea>
+
+                <label for="precio">Precio</label>
+                <input type="text" name="precio" id="precio" placeholder="Ingresa el precio del plato">
+
+                <label for="img">Imagen del plato</label>
+                <input type="file" name="img" id="img">
+
+                <button type="submit">Crear producto</button>
+        </form>
+
+
+        <%- include('./partials/footer.ejs') %>
+
+               
+    </body>
+
+    </html>
