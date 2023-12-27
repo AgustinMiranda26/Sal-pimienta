@@ -4,25 +4,25 @@
 
         <%- include('./partials/header.ejs') %>
 
-            <form class="form-creacion" action="/crear-plato" method="POST" enctype="multipart/form-data">
-                <h1>Crear plato</h1>
+            <form class="form-creacion" action="/editar-producto/<%=plato.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+                <h1>Actualizar plato</h1>
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre del plato">
+                <input type="text" name="nombre" id="nombre" value="<%= plato.nombre %>">
 
                 <label for="descripcionCorta">Descripcion corta</label>
                 <input type="text" name="descripcionCorta" id="descripcionCorta"
-                    placeholder="Ingresa tu descripcion corta">
+                 value="<%= plato.descripcionCorta %>">
 
                 <label for="descripcionDetallada">Descripcion detallada</label>
-                <textarea name="descripcionDetallada" id="descripcionDetallada" cols="30" rows="10"></textarea>
+                <textarea name="descripcionDetallada" id="descripcionDetallada" cols="30" rows="10"><%= plato.descripcionDetallada %> </textarea>
 
                 <label for="precio">Precio</label>
-                <input type="text" name="precio" id="precio" placeholder="Ingresa el precio del plato">
+                <input type="text" name="precio" id="precio"  value="<%= plato.precio %>">
 
                 <label for="img">Imagen del plato</label>
                 <input type="file" name="img" id="img">
 
-                <button type="submit"> Crear producto </button>
+                <button type="submit"> Actualizar producto </button>
             </form>
 
 

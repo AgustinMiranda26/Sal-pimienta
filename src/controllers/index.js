@@ -21,8 +21,43 @@ const controller={
         res.render('crearPlato.ejs')
     },
     guardarPlato: function (req,res){
-        console.log(req.file);
+        const platoNuevo= {
+            id: Date.now(),
+            ...req.body,
+            img: req.file.filename || 'default.png'
+        }
+       listaPlatos.push(platoNuevo)
+        //convertir listaPLatos a JSON
+        let listaPlatosJSON= JSON.stringify(listaPlatos, null, " ")
+        // Escribir el JSON
+        fs.writeFileSync(pathPlatos, listaPlatosJSON)
+        //redireccion a home
+        res.redirect('/')
+    },
+    editarPlato: function(req,res){
+        const id=req.params.id
+        const plato= listaPlatos.find(plato => plato.id == id)
+        if(plato){
+            res.render('actualizarPlato.ejs', {plato:plato})
+        } 
+        res.send('el producto que quieres editar no existe')
+    },
+    putPlato: (req,res) =>{
+        const {id} =req.params
+        const {nombre, descripcionCorta, descripcionDetallada,precio} =req.body
+        const platoAEditar= listaPlatos.find(plato=> plato.id == id)
+        platoAEditar.nombre = nombre || platoAEditar.nombre
+        platoAEditar.descripcionCorta = descripcionCorta || platoAEditar.descripcionCorta
+        platoAEditar.descripcionDetallada = descripcionDetallada || platoAEditar.descripcionDetallada
+        platoAEditar.precio = precio || platoAEditar.precio
+        platoAEditar.img = req.file.filename || platoAEditar.img
+        
+
+        fs.writeFileSync(pathPlatos, JSON.stringify(listaPlatos, null, ' '))
+        res.redirect('/')
     }
+    
 }
+
 
 module.exports=controller 
